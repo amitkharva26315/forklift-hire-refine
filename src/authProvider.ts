@@ -1,24 +1,47 @@
 import type { AuthProvider } from "@refinedev/core";
 
-export const TOKEN_KEY = "refine-auth";
+export const TOKEN_KEY = "token";
 
 export const authProvider: AuthProvider = {
-  login: async ({ username, email, password }) => {
-    if ((username || email) && password) {
-      localStorage.setItem(TOKEN_KEY, username);
-      return {
-        success: true,
-        redirectTo: "/",
-      };
+  login: async ({ username, password }) => {
+    // if ((username || email) && password) {
+    //   localStorage.setItem(TOKEN_KEY, username);
+    //   return {
+    //     success: true,
+    //     redirectTo: "/",
+    //   };
+    // }
+
+    // return {
+    //   success: false,
+    //   error: {
+    //     name: "LoginError",
+    //     message: "Invalid username or password",
+    //   },
+    // };
+    console.log("Login from authProvider");
+
+    const response = await fetch(
+      "https://amitawt.pythonanywhere.com/auth/signin/",
+      {
+        method: "POST",
+        body: JSON.stringify({ username, password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      },
+    );
+
+    const data = await response.json();
+
+    if (data.token) {
+      localStorage.setItem(TOKEN_KEY, data.token);
+      return { success: true };
+    } else {
+      return Promise.reject(new Error("Invalid credentials"));
     }
 
-    return {
-      success: false,
-      error: {
-        name: "LoginError",
-        message: "Invalid username or password",
-      },
-    };
+    return { success: false };
   },
   logout: async () => {
     localStorage.removeItem(TOKEN_KEY);
