@@ -41,7 +41,7 @@ export const authProvider: AuthProvider = {
       return Promise.reject(new Error("Invalid credentials"));
     }
 
-    return { success: false };
+    // return { success: false };
   },
   logout: async () => {
     localStorage.removeItem(TOKEN_KEY);

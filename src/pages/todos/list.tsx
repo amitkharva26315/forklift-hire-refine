@@ -62,9 +62,13 @@ export const TodosList = () => {
     [todosData]
   );
 
+
   return (
     <List>
-      <DataGrid {...dataGridProps} columns={columns} autoHeight />
+      <DataGrid {...dataGridProps} columns={columns} autoHeight sx={{
+          display: "flex",
+          flexDirection: "column-reverse"  // Apply styles directly using the sx prop
+        }} />
     </List>
   );
 };

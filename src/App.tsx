@@ -34,6 +34,8 @@ import { BlogPostCreate, BlogPostEdit, BlogPostList, BlogPostShow } from "./page
 import { CustomLogin } from "./pages/customLogin";
 import { GroupCreate, GroupEdit, GroupList, GroupShow } from "./pages/awt/group";
 import { dataListProvider } from "./dataProvider";
+import Pricing from "./components/pricing";
+import Pricing2 from "./components/pricing2";
 
 function App() {
   const API_URL = "https://jsonplaceholder.typicode.com";
@@ -151,6 +153,7 @@ function App() {
                                   <div>Refine built-in</div>
                                   {items[3]}
                                   {items[4]}
+                                  {/* {items} */}
                                   {logout}
                                 </>
                               );
@@ -210,9 +213,11 @@ function App() {
                     </Authenticated>
                   }
                 >
+                  <Route path="/pricing" element={<Pricing />} />
+                  <Route path="/pricing2" element={<Pricing2 />} />
                   <Route path="/login" element={<CustomLogin />} />
-                  {/* <Route path="/login" element={<Login />} />
-                  <Route path="/custom-login" element={<CustomLogin />} /> */}
+                  {/* <Route path="/login" element={<Login />} /> */}
+                  {/* <Route path="/custom-login" element={<CustomLogin />} /> */}
                   <Route path="/register" element={<Register />} />
                   <Route
                     path="/forgot-password"
